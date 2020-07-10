@@ -3,7 +3,7 @@ import os
 from find_page import PageSearch, ContentSearch
 
 """
-purpose of this script is to list real estate in Gdansk city
+purpose of this script is to list annoucements of real estate in Gdansk city
 and save it in csv file
 inputs are url page, number of page, name of div which contain
 all annoucements and name of listed annoucements - articles
@@ -16,10 +16,18 @@ result is CSV file named "gratka<current_date>.csv"
 """
 
 
-# Create a CSV file in current folder to save results
-timestr = time.strftime('%d_%m_%Y')
-__location__ = os.path.dirname(__file__)
-f = open(f"{__location__}/results/gratka{timestr}.csv", 'w')
+current_date = time.strftime('%m_%m_%Y')
+
+location = os.path.dirname(__file__)
+# create "results" folder in current path
+path_file = f"{location}/results"
+if not os.path.exists(path_file):
+    os.makedirs(path_file)
+
+# creating CSV file in current path with current date
+csv_name = f"{location}/results/gratka{current_date}.csv"
+f = open(csv_name, 'w+')
+
 f.write("name;location;price;price/mkw;info;site\n")
 
 # url  and its number of page
